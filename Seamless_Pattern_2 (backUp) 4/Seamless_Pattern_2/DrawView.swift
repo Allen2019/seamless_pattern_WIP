@@ -92,7 +92,7 @@ class DrawView: UIView, drawViewProtocol {
             lastPoint2 = newPoint
             lastPoint = touch.location(in: self)
         }
-        else if newPoint.x < 0
+        else if newPoint.x < 0 && newPoint.y > 0
         {
             newPoint = CGPoint(x: newPoint.x+fVC.d, y: newPoint.y)
             
@@ -126,7 +126,7 @@ class DrawView: UIView, drawViewProtocol {
             lastPoint2 = newPoint
             lastPoint = touch.location(in: self)
         }
-        else if newPoint.y < 0
+        else if newPoint.y < 0 && newPoint.x > 0
         {
             newPoint = CGPoint(x: newPoint.x, y: newPoint.y+fVC.d)
             
