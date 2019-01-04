@@ -50,6 +50,8 @@ class DrawView: UIView, drawViewProtocol {
         }
         else if newPoint.x < 0 && newPoint.y < 0 //top left corner
         {
+            newPoint = CGPoint(x: newPoint.x+fVC.d, y: newPoint.y+fVC.d)
+            
             if lastPoint2 == nil
             {
                 lastPoint2 = lastPoint
