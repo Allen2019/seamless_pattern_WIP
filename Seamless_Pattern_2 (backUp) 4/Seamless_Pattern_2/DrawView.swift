@@ -60,9 +60,9 @@ class DrawView: UIView, drawViewProtocol {
                 lastPoint2.x += fVC.d
             }
             
-            if lastPoint2.x > fVC.d/2
+            if lastPoint2.y < fVC.d/2
             {
-                lastPoint2.x -= fVC.d
+                lastPoint2.y += fVC.d
             }
             lines2.append(Line(start: CGPoint(x: lastPoint2.x, y: lastPoint2.y), end: newPoint))
             
