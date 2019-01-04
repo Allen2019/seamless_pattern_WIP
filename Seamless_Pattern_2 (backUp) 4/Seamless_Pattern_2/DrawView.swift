@@ -244,8 +244,3 @@ class DrawView: UIView, drawViewProtocol {
     
 
 }
-
-//hi
-// hi 2
-// hi 3 ??
-// Oh, I think I get it
