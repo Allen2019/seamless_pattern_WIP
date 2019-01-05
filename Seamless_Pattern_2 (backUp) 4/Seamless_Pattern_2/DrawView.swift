@@ -11,9 +11,9 @@ import UIKit
 class DrawView: UIView, drawViewProtocol {
 
     var lines: [Line] = []
-    var lines2: [Line] = []
+    
     var lastPoint: CGPoint!
-    var lastPoint2: CGPoint!
+    
     
     var color: CGColor = UIColor.black.cgColor
     var lineWidth: CGFloat = 5.0
@@ -46,104 +46,57 @@ class DrawView: UIView, drawViewProtocol {
         {
             lines.append(Line(start: lastPoint, end: newPoint))
             lastPoint = newPoint
-            lastPoint2 = touch.location(in: self)
         }
         else if newPoint.x < 0 && newPoint.y < 0 //top left corner
         {
             newPoint = CGPoint(x: newPoint.x+fVC.d, y: newPoint.y+fVC.d)
             
-            if lastPoint2 == nil
-            {
-                lastPoint2 = lastPoint
-            }
+            lastPoint.x += fVC.d
             
-            if lastPoint2.x < fVC.d/2
-            {
-                lastPoint2.x += fVC.d
-            }
             
-            if lastPoint2.y < fVC.d/2
-            {
-                lastPoint2.y += fVC.d
-            }
-            lines2.append(Line(start: CGPoint(x: lastPoint2.x, y: lastPoint2.y), end: newPoint))
+            lastPoint.y += fVC.d
             
-            lastPoint2 = newPoint
+            lines.append(Line(start: CGPoint(x: lastPoint.x, y: lastPoint.y), end: newPoint))
+            
             lastPoint = touch.location(in: self)
         }
-        else if newPoint.x > fVC.d
+        else if newPoint.x > fVC.d //to the right
         {
             newPoint = CGPoint(x: newPoint.x-fVC.d, y: newPoint.y)
             lastPoint.x -= fVC.d
             
-//            if lastPoint2 == nil
-//            {
-//                lastPoint2 = lastPoint
-//            }
-//            if lastPoint2.x > fVC.d/2
-//            {
-//                lastPoint2.x -= fVC.d
-//            }
-//
-//            if lastPoint2.y < fVC.d/2
-//            {
-//                lastPoint2.y += fVC.d
-//            }
-//
             lines.append(Line(start: CGPoint(x: lastPoint.x, y: lastPoint.y), end: newPoint))
             
-//            lastPoint2 = newPoint
             lastPoint = touch.location(in: self)
         }
-        else if newPoint.x < 0 && newPoint.y > 0
+        else if newPoint.x < 0 && newPoint.y > 0 //to the left
         {
             newPoint = CGPoint(x: newPoint.x+fVC.d, y: newPoint.y)
             
-            if lastPoint2 == nil
-            {
-                lastPoint2 = lastPoint
-            }
-            if lastPoint2.x < fVC.d/2
-            {
-                lastPoint2.x += fVC.d
-            }
-            lines2.append(Line(start: CGPoint(x: lastPoint2.x, y: lastPoint2.y), end: newPoint))
+            lastPoint.x += fVC.d
             
-            lastPoint2 = newPoint
+            lines.append(Line(start: CGPoint(x: lastPoint.x, y: lastPoint.y), end: newPoint))
+            
             lastPoint = touch.location(in: self)
         }
-        else if newPoint.y > fVC.d
+        else if newPoint.y > fVC.d // to the bottom
         {
             newPoint = CGPoint(x: newPoint.x, y: newPoint.y-fVC.d)
             
-            if lastPoint2 == nil
-            {
-                lastPoint2 = lastPoint
-            }
-            if lastPoint2.y > fVC.d/2
-            {
-                lastPoint2.y -= fVC.d
-            }
-            lines2.append(Line(start: CGPoint(x: lastPoint2.x, y: lastPoint2.y), end: newPoint))
+            lastPoint.y -= fVC.d
             
-            lastPoint2 = newPoint
+            lines.append(Line(start: CGPoint(x: lastPoint.x, y: lastPoint.y), end: newPoint))
+            
             lastPoint = touch.location(in: self)
         }
-        else if newPoint.y < 0 && newPoint.x > 0
+        else if newPoint.y < 0 && newPoint.x > 0 // to the top
         {
             newPoint = CGPoint(x: newPoint.x, y: newPoint.y+fVC.d)
             
-            if lastPoint2 == nil
-            {
-                lastPoint2 = lastPoint
-            }
-            if lastPoint2.y < fVC.d/2
-            {
-                lastPoint2.y += fVC.d
-            }
-            lines2.append(Line(start: CGPoint(x: lastPoint2.x, y: lastPoint2.y), end: newPoint))
+            lastPoint.y += fVC.d
+
+            lines.append(Line(start: CGPoint(x: lastPoint.x, y: lastPoint.y), end: newPoint))
             
-            lastPoint2 = newPoint
             lastPoint = touch.location(in: self)
         }
         
@@ -169,14 +122,7 @@ class DrawView: UIView, drawViewProtocol {
 //                print("line.end.x: \(line.end.x), line.end.y: \(line.end.y)")
         
         }
-        for line in lines2 {
-            
-            context?.move(to: CGPoint(x: line.start.x, y: line.start.y))
-            print("line.start.x2: \(line.start.x), line.start.y2: \(line.start.y)")
-            context?.addLine(to: CGPoint(x: line.end.x, y: line.end.y))
-            print("line.end.x2: \(line.end.x), line.end.y2: \(line.end.y)")
-            
-        }
+
         
         
         
