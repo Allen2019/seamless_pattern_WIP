@@ -52,9 +52,40 @@ class DrawView: UIView, drawViewProtocol {
             newPoint = CGPoint(x: newPoint.x+fVC.d, y: newPoint.y+fVC.d)
             
             lastPoint.x += fVC.d
-            
-            
             lastPoint.y += fVC.d
+            
+            lines.append(Line(start: CGPoint(x: lastPoint.x, y: lastPoint.y), end: newPoint))
+            
+            lastPoint = touch.location(in: self)
+        }
+        else if newPoint.x > fVC.d && newPoint.y < 0 //top right corner
+        {
+            newPoint = CGPoint(x: newPoint.x-fVC.d, y: newPoint.y+fVC.d)
+            
+            lastPoint.x -= fVC.d
+            lastPoint.y += fVC.d
+            
+            lines.append(Line(start: CGPoint(x: lastPoint.x, y: lastPoint.y), end: newPoint))
+            
+            lastPoint = touch.location(in: self)
+        }
+        else if newPoint.x > fVC.d && newPoint.y > fVC.d //bottom right corner
+        {
+            newPoint = CGPoint(x: newPoint.x-fVC.d, y: newPoint.y-fVC.d)
+            
+            lastPoint.x -= fVC.d
+            lastPoint.y -= fVC.d
+            
+            lines.append(Line(start: CGPoint(x: lastPoint.x, y: lastPoint.y), end: newPoint))
+            
+            lastPoint = touch.location(in: self)
+        }
+        else if newPoint.x < 0 && newPoint.y > fVC.d //bottom left corner
+        {
+            newPoint = CGPoint(x: newPoint.x+fVC.d, y: newPoint.y-fVC.d)
+            
+            lastPoint.x += fVC.d
+            lastPoint.y -= fVC.d
             
             lines.append(Line(start: CGPoint(x: lastPoint.x, y: lastPoint.y), end: newPoint))
             
@@ -69,7 +100,7 @@ class DrawView: UIView, drawViewProtocol {
             
             lastPoint = touch.location(in: self)
         }
-        else if newPoint.x < 0 //&& newPoint.y > 0 //to the left
+        else if newPoint.x < 0  //to the left
         {
             newPoint = CGPoint(x: newPoint.x+fVC.d, y: newPoint.y)
             
@@ -89,7 +120,7 @@ class DrawView: UIView, drawViewProtocol {
             
             lastPoint = touch.location(in: self)
         }
-        else if newPoint.y < 0 //&& newPoint.x > 0 // to the top
+        else if newPoint.y < 0 // to the top
         {
             newPoint = CGPoint(x: newPoint.x, y: newPoint.y+fVC.d)
             
