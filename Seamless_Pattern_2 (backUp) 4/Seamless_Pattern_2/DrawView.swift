@@ -74,24 +74,25 @@ class DrawView: UIView, drawViewProtocol {
         else if newPoint.x > fVC.d
         {
             newPoint = CGPoint(x: newPoint.x-fVC.d, y: newPoint.y)
+            lastPoint.x -= fVC.d
             
-            if lastPoint2 == nil
-            {
-                lastPoint2 = lastPoint
-            }
-            if lastPoint2.x > fVC.d/2
-            {
-                lastPoint2.x -= fVC.d
-            }
+//            if lastPoint2 == nil
+//            {
+//                lastPoint2 = lastPoint
+//            }
+//            if lastPoint2.x > fVC.d/2
+//            {
+//                lastPoint2.x -= fVC.d
+//            }
+//
+//            if lastPoint2.y < fVC.d/2
+//            {
+//                lastPoint2.y += fVC.d
+//            }
+//
+            lines.append(Line(start: CGPoint(x: lastPoint.x, y: lastPoint.y), end: newPoint))
             
-            if lastPoint2.y < fVC.d/2
-            {
-                lastPoint2.y += fVC.d
-            }
-            
-            lines2.append(Line(start: CGPoint(x: lastPoint2.x, y: lastPoint2.y), end: newPoint))
-            
-            lastPoint2 = newPoint
+//            lastPoint2 = newPoint
             lastPoint = touch.location(in: self)
         }
         else if newPoint.x < 0 && newPoint.y > 0
