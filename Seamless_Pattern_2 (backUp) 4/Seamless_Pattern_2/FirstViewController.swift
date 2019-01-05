@@ -42,7 +42,7 @@ class FirstViewController: UIViewController {
     @IBAction func clearButton(_ sender: Any) {
         
     drawView.lines = []
-    drawView.lines2 = []
+    
     
     drawView.setNeedsDisplay()
     
